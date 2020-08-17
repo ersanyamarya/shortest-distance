@@ -10,3 +10,5 @@
 
 - NodeJS
 - TypeScript
+
+> CI with github actions
