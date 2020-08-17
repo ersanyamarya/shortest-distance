@@ -5,6 +5,7 @@ export default class Customer extends Address {
     address?: Store
     displacement?: number
   }
+
   constructor(lat: number, long: number, name: string, stores: Store[]) {
     super(lat, long, name)
 

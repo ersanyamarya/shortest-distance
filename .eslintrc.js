@@ -10,7 +10,6 @@ module.exports = {
     sourceType: 'module',
   },
   extends: [
-    'koa',
     'standard',
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',

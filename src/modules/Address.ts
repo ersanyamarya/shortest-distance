@@ -10,14 +10,14 @@ export default class Address {
   }
 
   distance(point: Address): number {
-    let R = 6378137 // Earth’s mean radius in meter
-    let dLat = rad(point.lat - this.lat)
-    let dLong = rad(point.long - this.long)
-    let a =
+    const R = 6378137 // Earth’s mean radius in meter
+    const dLat = rad(point.lat - this.lat)
+    const dLong = rad(point.long - this.long)
+    const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(rad(this.lat)) * Math.cos(rad(point.lat)) * Math.sin(dLong / 2) * Math.sin(dLong / 2)
-    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-    let d = R * c
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+    const d = R * c
     return d // returns the distance in Km
   }
 }

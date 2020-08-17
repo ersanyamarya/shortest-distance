@@ -1,6 +1,13 @@
 import { Address, Store, Customer } from './modules'
 import { hoursToMinSec } from './utils'
+
 const SPEED = 60
+interface PathResponse {
+  time: string
+  store: string
+  depot: string
+}
+
 const depots = [
   new Address(51.2348, 6.825636, 'Metrostrasse 12, 40235 Düsseldorf'),
   new Address(51.241394, 6.830576, 'Ludenberger Str. 1, 40629 Düsseldorf'),
@@ -21,7 +28,7 @@ const customers = [
   new Customer(51.207048, 6.832643, 'Reisholzer Str. 48, 40231 Düsseldorf', stores),
 ]
 
-function getPath(cust: Customer): any {
+function getPath(cust: Customer): PathResponse {
   const totalDistance = (cust.store.displacement + cust.store.address.depot.displacement) / 1000
 
   return {

@@ -1,18 +1,15 @@
 {
   "name": "shortest-distance",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "develop": "nodemon --ext ts,json --watch src --exec node --inspect=0.0.0.0:9229 -r ts-node/register src/index.ts",
-    "lint-fix": "eslint --ext ts --fix ./src ./__tests__",
-    "lint": "eslint --ext ts ./src ./__tests__",
+    "lint-fix": "eslint --ext ts --fix ./src",
+    "lint": "eslint --ext ts ./src",
     "test": "NODE_ENV=test jest --config=./jest.config.js --runInBand --no-cache"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@types/node": "^14.0.27",
     "@types/jest": "^26.0.9",
@@ -31,6 +28,31 @@
     "typescript": "^3.9.7",
     "jest": "^26.2.2",
     "jest-junit": "^11.1.0",
-    "ts-jest": "^26.2.0"
-  }
+    "ts-jest": "^26.2.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11"
+  },
+  "lint-staged": {
+    "*.ts": "eslint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ersanyamarya/shortest-distance.git"
+  },
+  "keywords": [
+    "nodejs",
+    "koa",
+    "typescript"
+  ],
+  "author": "Sanyam Arya",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/ersanyamarya/shortest-distance/issues"
+  },
+  "homepage": "https://github.com/ersanyamarya/shortest-distance#readme"
 }
