@@ -59,8 +59,10 @@ jobs:
     needs: [auto_merge_dependabot]
     runs-on: ubuntu-latest
     steps:
+      - name: Get Branch Name
+        uses: nelonoel/branch-name@v1
       - name: Delete thre branch
         uses: dawidd6/action-delete-branch@v3.0.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branches: ${{ env.GITHUB_REF }}
+          branches: ${BRANCH_NAME}
