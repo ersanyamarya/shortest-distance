@@ -6,46 +6,46 @@ on:
       - master
 
 jobs:
-  test_pull_request:
-    runs-on: ubuntu-latest
+#   test_pull_request:
+#     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x]
+#     strategy:
+#       matrix:
+#         node-version: [10.x, 12.x]
 
-    steps:
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+#     steps:
+#       - uses: actions/cache@v2
+#         with:
+#           path: ~/.npm
+#           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#           restore-keys: |
+#             ${{ runner.os }}-node-
 
-      - name: Checkout code
-        uses: actions/checkout@v2
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
+#       - name: Use Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: ${{ matrix.node-version }}
 
-      - name: Install dependencies
-        run: npm ci
+#       - name: Install dependencies
+#         run: npm ci
 
-      - name: Run linter
-        run: npm run lint
+#       - name: Run linter
+#         run: npm run lint
 
-      - name: Run tests
-        run: npm run test
+#       - name: Run tests
+#         run: npm run test
 
-      - name: Run build
-        run: npm run build
+#       - name: Run build
+#         run: npm run build
 
   auto_merge_dependabot:
     name: Merge pull Request
-    needs: [test_pull_request]
+#     needs: [test_pull_request]
     runs-on: ubuntu-latest
-    if: github.base_ref == 'master' && github.actor == 'dependabot[bot]'
+#     if: github.base_ref == 'master' && github.actor == 'dependabot[bot]' 
     steps:
       - name: Merge
-        uses: everlytic/branch-merge@1.1.0
+        uses: lots0logs/gh-action-auto-merge@1.0.0
