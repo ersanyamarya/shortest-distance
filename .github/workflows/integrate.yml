@@ -50,4 +50,5 @@ jobs:
       - name: Merge
         uses: ridedott/merge-me-action@master
         with:
+          GITHUB_LOGIN: ersanyamarya
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
