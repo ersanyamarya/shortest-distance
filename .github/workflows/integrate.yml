@@ -48,4 +48,6 @@ jobs:
 #     if: github.base_ref == 'master' && github.actor == 'dependabot[bot]' 
     steps:
       - name: Merge
-        uses: lots0logs/gh-action-auto-merge@1.0.0
+        uses: "pascalgn/automerge-action@f81beb99aef41bb55ad072857d43073fba833a98"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
