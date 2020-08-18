@@ -50,14 +50,17 @@ jobs:
       - name: Merge
         uses: ridedott/merge-me-action@master
         with:
-          GITHUB_LOGIN: ersanyamarya, dependabot[bot]
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
-      - name: Delete multiple branches
-        uses: dawidd6/action-delete-branch@v3.0.2
-        with:
-          # GitHub token
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branches: ${GITHUB_REF##*/}
           GITHUB_LOGIN: ersanyamarya
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+  delete_merged_dependabot:
+    name: Delete branch after merge
+    needs: [auto_merge_dependabot]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete thre branch
+        uses: dawidd6/action-delete-branch@v3.0.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branches: ${{ env.GITHUB_REF }}
