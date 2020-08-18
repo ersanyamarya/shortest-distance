@@ -52,9 +52,13 @@ jobs:
         with:
           GITHUB_LOGIN: ersanyamarya, dependabot[bot]
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
+      - name: Extract branch name
+        shell: bash
+        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
+      - name: Test
+        run: echo "${BRANCH_NAME}"  
       - name: Delete thre branch
         uses: dawidd6/action-delete-branch@v3.0.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branches: ${GITHUB_REF##*/}
+          branches: ${BRANCH_NAME}
