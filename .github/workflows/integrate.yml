@@ -6,62 +6,49 @@ on:
       - master
 
 jobs:
-#   test_pull_request:
-#     runs-on: ubuntu-latest
-
-#     strategy:
-#       matrix:
-#         node-version: [10.x, 12.x]
-
-#     steps:
-#       - uses: actions/cache@v2
-#         with:
-#           path: ~/.npm
-#           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-#           restore-keys: |
-#             ${{ runner.os }}-node-
-
-#       - name: Checkout code
-#         uses: actions/checkout@v2
-
-#       - name: Use Node.js ${{ matrix.node-version }}
-#         uses: actions/setup-node@v1
-#         with:
-#           node-version: ${{ matrix.node-version }}
-
-#       - name: Install dependencies
-#         run: npm ci
-
-#       - name: Run linter
-#         run: npm run lint
-
-#       - name: Run tests
-#         run: npm run test
-
-#       - name: Run build
-#         run: npm run build
-
-#   auto_merge_dependabot:
-#     name: Merge pull Request
-# #     needs: [test_pull_request]
-#     runs-on: ubuntu-latest
-# #     if: github.base_ref == 'master' && github.actor == 'dependabot[bot]' 
-#     steps:
-#       - name: Merge
-#         uses: ridedott/merge-me-action@master
-#         with:
-#           GITHUB_LOGIN: ersanyamarya
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-  delete_merged_dependabot:
-    name: Delete branch after merge
-#     needs: [auto_merge_dependabot]
+  test_pull_request:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+
     steps:
-      - uses: nelonoel/branch-name@v1
-      - name: Delete thre branch
-        uses: dawidd6/action-delete-branch@v3.0.2
+      - uses: actions/cache@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branches: ${BRANCH_NAME}
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Run build
+        run: npm run build
+
+  auto_merge_dependabot:
+    name: Merge pull Request
+    needs: [test_pull_request]
+    runs-on: ubuntu-latest
+    if: github.base_ref == 'master' && github.actor == 'dependabot[bot]' 
+    steps:
+      - name: Merge
+        uses: ridedott/merge-me-action@master
+        with:
+          GITHUB_LOGIN: dependabot[bot]
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
