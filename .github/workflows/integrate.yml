@@ -59,3 +59,5 @@ jobs:
           # GitHub token
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branches: ${GITHUB_REF##*/}
+          GITHUB_LOGIN: ersanyamarya
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
