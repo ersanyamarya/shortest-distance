@@ -41,26 +41,25 @@ jobs:
 #       - name: Run build
 #         run: npm run build
 
-  auto_merge_dependabot:
-    name: Merge pull Request
-#     needs: [test_pull_request]
-    runs-on: ubuntu-latest
-#     if: github.base_ref == 'master' && github.actor == 'dependabot[bot]' 
-    steps:
-      - name: Merge
-        uses: ridedott/merge-me-action@master
-        with:
-          GITHUB_LOGIN: ersanyamarya
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#   auto_merge_dependabot:
+#     name: Merge pull Request
+# #     needs: [test_pull_request]
+#     runs-on: ubuntu-latest
+# #     if: github.base_ref == 'master' && github.actor == 'dependabot[bot]' 
+#     steps:
+#       - name: Merge
+#         uses: ridedott/merge-me-action@master
+#         with:
+#           GITHUB_LOGIN: ersanyamarya
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
   delete_merged_dependabot:
     name: Delete branch after merge
-    needs: [auto_merge_dependabot]
+#     needs: [auto_merge_dependabot]
     runs-on: ubuntu-latest
     steps:
-      - name: Get Branch Name
-        uses: nelonoel/branch-name@v1
+      - uses: nelonoel/branch-name@v1
       - name: Delete thre branch
         uses: dawidd6/action-delete-branch@v3.0.2
         with:
