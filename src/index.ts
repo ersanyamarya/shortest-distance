@@ -1,5 +1,5 @@
 import { Address, Store, Customer } from './modules'
-import { hoursToMinSec } from './utils'
+import { hoursToMinSec } from 'time-pocket'
 
 const SPEED = 60
 interface PathResponse {
@@ -32,7 +32,7 @@ function getPath(cust: Customer): PathResponse {
   const totalDistance = (cust.store.displacement + cust.store.address.depot.displacement) / 1000
 
   return {
-    time: hoursToMinSec(totalDistance / SPEED).txt,
+    time: hoursToMinSec(totalDistance / SPEED, { txt: true }).txt,
     store: cust.store.address.name,
     depot: cust.store.address.depot.address.name,
   }
