@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [12.x]
 
     steps:
       - uses: actions/cache@v2
@@ -40,12 +40,17 @@ jobs:
 
       - name: Run build
         run: npm run build
+      - name: SonarCloud scanner
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   auto_merge_dependabot:
     name: Merge pull Request
     needs: [test_pull_request]
     runs-on: ubuntu-latest
-    if: github.base_ref == 'master' && github.actor == 'dependabot[bot]' 
+    if: github.base_ref == 'master' && github.actor == 'dependabot[bot]'
     steps:
       - name: Merge
         uses: ridedott/merge-me-action@master
