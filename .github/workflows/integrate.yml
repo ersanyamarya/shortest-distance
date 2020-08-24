@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [12.x]
 
     steps:
       - uses: actions/cache@v2
@@ -45,7 +45,7 @@ jobs:
     name: Merge pull Request
     needs: [test_pull_request]
     runs-on: ubuntu-latest
-    if: github.base_ref == 'master' && github.actor == 'dependabot[bot]' 
+    if: github.base_ref == 'master' && github.actor == 'dependabot[bot]'
     steps:
       - name: Merge
         uses: ridedott/merge-me-action@master
