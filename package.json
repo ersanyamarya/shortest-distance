@@ -28,7 +28,7 @@
     "typescript": "^3.9.7",
     "jest": "^26.4.2",
     "jest-junit": "^11.1.0",
-    "ts-jest": "^26.2.0",
+    "ts-jest": "^26.3.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.13"
   },
